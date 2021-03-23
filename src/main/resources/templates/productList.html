@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Made by MOS</title>
+
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "/>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+    <style>
+        body {
+            padding-top: 60px;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav th:insert="fragments/navbar :: nav_fragment" />
+
+<div class="container p-3 my-3 bg-primary text-white">
+    Product List
+</div>
+
+<div th:if="${productDtoList.isEmpty()}">
+    No product Available.
+</div>
+<div class="container">
+<div class="row"  th:unless="${productDtoList.isEmpty()}">
+
+    <div class="col-lg-4 col-md-6 mb-4" th:each="productDto : ${productDtoList}">
+
+        <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="http://placehold.it/500x400" alt=""></a>
+            <div class="card-body">
+                <h4 class="card-title">
+                    <a href="#"><span th:text="${productDto.id}"></span></a>
+                </h4>
+                <h5>$<span th:text="${productDto.price}"></span></h5>
+                <p class="card-text"><span th:text="${productDto.name}"></span></p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9733;</small>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+
+<footer th:insert="fragments/footer :: footer_fragment" />
+</body>
+</html>
